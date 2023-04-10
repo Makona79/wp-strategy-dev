@@ -30,3 +30,5 @@ show_admin_bar(false);
 add_theme_support('post-thumbnails');
 
 add_theme_support('post-thumbnails', array('portfolio'));
+
+add_theme_support('menus');
