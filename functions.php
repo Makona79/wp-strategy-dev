@@ -32,3 +32,34 @@ add_theme_support('post-thumbnails');
 add_theme_support('post-thumbnails', array('portfolio'));
 
 add_theme_support('menus');
+
+add_action('wp_ajax_callback_mail', 'callback_mail');
+add_action('wp_ajax_nopriv_callback_mail', 'callback_mail');
+
+function callback_mail()
+{
+	$name = $_POST['name'];
+	$email = $_POST['email'];
+	$phone = $_POST['phone'];
+	$zone = $_POST['zone'];
+	$budget = $_POST['budget'];
+	$type = $_POST['type'];
+
+
+	$to = 'makona79@yandex.ru';
+	$subject = 'Hello';
+	$message = 'Hello';
+
+	remove_all_filters('wp_mail_from');
+	remove_all_filters('wp_mail_from_name');
+
+	$headers = array(
+		'From: Me Myself <me@example.net>',
+		'content-type: text/html',
+		'Cc: John Q Codex <jqc@wordpress.org>',
+		'Cc: iluvwp@wordpress.org', // тут можно использовать только простой email адрес
+	);
+
+	wp_mail($to, $subject, $message, $headers);
+	wp_die();
+}

@@ -1,5 +1,6 @@
+<?php get_header(); ?>
 <?php
-get_header();
+/* Template Name: main */
 ?>
 
 <!-- END templateux-navbar -->
@@ -7,7 +8,9 @@ get_header();
 	<div class="container">
 		<div class="row align-items-center justify-content-center intro">
 			<div class="col-md-10" data-aos="fade-up">
-				<h1>We are Strategy. A digitally minded creative agency based in NYC.</h1>
+				<h1>
+					We are Strategy. A digitally minded creative agency based in NYC.
+				</h1>
 				<a href="#next" class="go-down js-smoothscroll"></a>
 			</div>
 		</div>
@@ -18,78 +21,52 @@ get_header();
 <section class="templateux-portfolio-overlap" id="next">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-6" data-aos="fade-up">
-				<a class="project animsition-link" href="work-single.html">
-					<figure>
-						<img src="images/img_1.jpg" alt="Free Template" class="img-fluid">
-					</figure>
-					<div class="project-hover">
-						<div class="project-hover-inner">
-							<h2>Canvas Tote Bag</h2>
-							<span>View Case Study</span>
+			<?php
+			// параметры по умолчанию
+			$my_posts = get_posts(
+				array(
+					'numberposts' => 5,
+					'category' => 0,
+					'orderby' => 'date',
+					'order' => 'DESC',
+					'include' => array(),
+					'exclude' => array(),
+					'meta_key' => '',
+					'meta_value' => '',
+					'post_type' => 'portfolio',
+					'suppress_filters' => true,
+					// подавление работы фильтров изменения SQL запроса
+				)
+			);
+			global $post;
+			foreach ($my_posts as $post) {
+				setup_postdata($post);
+				?>
+				<article class="proj-article">
+					<a class="project animsition-link" href="<?php the_permalink(); ?>" data-aos="fade-up">
+						<figure>
+							<img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="Free Template" class="img-fluid">
+						</figure>
+						<div class="project-hover">
+							<div class="project-hover-inner">
+								<h2>
+									<?php the_title(); ?>
+								</h2>
+								<span>
+									<?php the_content(); ?>
+								</span>
+							</div>
 						</div>
-					</div>
-				</a>
-			</div>
-			<div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-				<a class="project animsition-link" href="work-single.html">
-					<figure>
-						<img src="images/img_2.jpg" alt="Free Template" class="img-fluid">
-					</figure>
-					<div class="project-hover">
-						<div class="project-hover-inner">
-							<h2>Work Hard, Play Hard</h2>
-							<span>View Case Study</span>
-						</div>
-					</div>
-				</a>
-			</div>
+					</a>
+				</article>
+				<?php
+			}
+
+			wp_reset_postdata(); // сброс			
+			?>
 		</div>
 		<!-- END row -->
 
-		<div class="row">
-			<div class="col-lg-4 col-md-6" data-aos="fade-up">
-				<a class="project animsition-link" href="work-single.html">
-					<figure>
-						<img src="images/img_3.jpg" alt="Free Template" class="img-fluid">
-					</figure>
-					<div class="project-hover">
-						<div class="project-hover-inner">
-							<h2>Moon High Res</h2>
-							<span>View Case Study</span>
-						</div>
-					</div>
-				</a>
-			</div>
-			<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-				<a class="project animsition-link" href="work-single.html">
-					<figure>
-						<img src="images/img_4.jpg" alt="Free Template" class="img-fluid">
-					</figure>
-					<div class="project-hover">
-						<div class="project-hover-inner">
-							<h2>H20 Water Bottle</h2>
-							<span>View Case Study</span>
-						</div>
-					</div>
-				</a>
-			</div>
-			<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-				<a class="project animsition-link" href="work-single.html">
-					<figure>
-						<img src="images/img_5.jpg" alt="Free Template" class="img-fluid">
-					</figure>
-					<div class="project-hover">
-						<div class="project-hover-inner">
-							<h2>Creatsy Mailing Box</h2>
-							<span>View Case Study</span>
-						</div>
-					</div>
-				</a>
-			</div>
-
-		</div>
-		<!-- END row -->
 	</div>
 </section>
 
@@ -109,69 +86,50 @@ get_header();
 							Consonantia.</h2>
 					</div>
 				</div>
-
-
 				<div class="row  pt-sm-0 pt-md-5 mb-5">
 
-					<div class="col-lg-6">
-						<div class="media templateux-media mb-4">
-							<div class="mr-4 icon">
-								<span class="icon-monitor display-3"></span>
-							</div>
-							<div class="media-body">
-								<h3 class="h5">Web Development</h3>
-								<p>Far far away, behind the word mountains, far from the countries Vokalia and
-									Consonantia, there live the blind texts.</p>
+					<?php
+					// параметры по умолчанию
+					$my_posts = get_posts(
+						array(
+							'numberposts' => 4,
+							'category' => 0,
+							'orderby' => 'date',
+							'order' => 'ASC',
+							'include' => array(),
+							'exclude' => array(),
+							'meta_key' => '',
+							'meta_value' => '',
+							'post_type' => 'experts-adv',
+							'suppress_filters' => true,
+							// подавление работы фильтров изменения SQL запроса
+						)
+					);
+					global $post;
+					foreach ($my_posts as $post) {
+						setup_postdata($post);
+						?>
+						<div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+							<div class="media templateux-media mb-4">
+								<div class="mr-4 icon">
+									<span class="<?php echo get_post_meta(get_the_ID(), 'adv-icon', true); ?> display-3"></span>
+								</div>
+								<div class="media-body">
+									<h3 class="h5">
+										<?php the_title(); ?>
+									</h3>
+									<p>
+										<?php the_content(); ?>
+									</p>
+								</div>
 							</div>
 						</div>
-					</div>
-
-					<div class="col-lg-6">
-						<div class="media templateux-media mb-4">
-							<div class="mr-4 icon">
-								<span class="icon-command display-3"></span>
-							</div>
-							<div class="media-body">
-								<h3 class="h5">Brand identity</h3>
-								<p>Far far away, behind the word mountains, far from the countries Vokalia and
-									Consonantia, there live the blind texts.</p>
-							</div>
-						</div>
-					</div>
-
+						<?php
+					}
+					wp_reset_postdata(); // сброс					
+					?>
 				</div>
 				<!-- END row -->
-				<div class="row clearfix">
-					<div class="col-lg-6">
-						<div class="media templateux-media mb-4">
-							<div class="mr-4 icon">
-								<span class="icon-feather display-3"></span>
-							</div>
-							<div class="media-body">
-								<h3 class="h5">Copywriting</h3>
-								<p>Far far away, behind the word mountains, far from the countries Vokalia and
-									Consonantia, there live the blind texts.</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-6">
-
-						<div class="media templateux-media mb-4">
-							<div class="mr-4 icon">
-								<span class="icon-shopping-cart display-3"></span>
-							</div>
-							<div class="media-body">
-								<h3 class="h5">eCommerce</h3>
-								<p>Far far away, behind the word mountains, far from the countries Vokalia and
-									Consonantia, there live the blind texts.</p>
-							</div>
-						</div>
-
-					</div>
-				</div>
-				<!-- END row -->
-
-
 			</div>
 		</div>
 	</div>
@@ -188,53 +146,54 @@ get_header();
 			<div class="col-md-8">
 				<div class="row">
 					<div class="col-lg-12">
-						<a class="post animsition-link" href="blog-single.html" data-aos="fade-up" data-aos-delay="100">
-							<figure>
-								<img src="images/img_1.jpg" alt="Free Template" class="img-fluid">
-							</figure>
-							<div class="post-hover">
-								<div class="post-hover-inner">
-									<h2>45 Cool Bag Illustrations</h2>
-									<span>February 21, 2018</span>
-								</div>
+						<?php
+						// параметры по умолчанию
+						$posts = get_posts(
+							array(
+								'numberposts' => 3,
+								'category' => 0,
+								'orderby' => 'date',
+								'order' => 'DESC',
+								'include' => array(),
+								'exclude' => array(),
+								'meta_key' => '',
+								'meta_value' => '',
+								'post_type' => 'post',
+								'suppress_filters' => true,
+								// подавление работы фильтров изменения SQL запроса
+							)
+						);
+						foreach ($posts as $post) {
+							setup_postdata($post);
+							?>
+							<div class="main-blog-wrapper" data-aos="fade-up">
+								<a class="post animsition-link" href="<?php the_permalink(); ?>">
+									<figure>
+										<img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="Free Template" class="img-fluid">
+									</figure>
+									<div class="project-hover">
+										<div class="project-hover-inner">
+											<h2>
+												<?php the_title(); ?>
+											</h2>
+											<span>
+												<?php echo date('F j,  Y'); ?>
+											</span>
+										</div>
+									</div>
+								</a>
 							</div>
-						</a>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-lg-6">
-						<a class="post animsition-link" href="blog-single.html" data-aos="fade-up" data-aos-delay="200">
-							<figure>
-								<img src="images/img_4.jpg" alt="Free Template" class="img-fluid">
-							</figure>
-							<div class="post-hover">
-								<div class="post-hover-inner">
-									<h2>45 Cool Bag Illustrations</h2>
-									<span>February 21, 2018</span>
-								</div>
-							</div>
-						</a>
-					</div>
-					<div class="col-lg-6">
-						<a class="post animsition-link" href="blog-single.html" data-aos="fade-up" data-aos-delay="300">
-							<figure>
-								<img src="images/img_5.jpg" alt="Free Template" class="img-fluid">
-							</figure>
-							<div class="post-hover">
-								<div class="post-hover-inner">
-									<h2>45 Cool Bag Illustrations</h2>
-									<span>February 21, 2018</span>
-								</div>
-							</div>
-						</a>
+							<?php
+						}
+						wp_reset_postdata(); // сброс			
+						?>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="row" data-aos="fade-up" data-aos-delay="400">
 			<div class="col-md-8 ml-auto">
-				<a href="blog.html" class="animsition-link">Read All Blog Posts </a>
+				<a href="/blog/" class="animsition-link">Read All Blog Posts </a>
 			</div>
 		</div>
 	</div>

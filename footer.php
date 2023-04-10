@@ -21,10 +21,40 @@
 				</p>
 			</div>
 			<div class="col-md-6 text-md-right text-center footer-social">
-				<a href="#" class="p-3"><span class="icon-facebook2"></span></a>
-				<a href="#" class="p-3"><span class="icon-twitter2"></span></a>
-				<a href="#" class="p-3"><span class="icon-dribbble2"></span></a>
-				<a href="#" class="p-3"><span class="icon-instagram"></span></a>
+
+				<?php
+				// параметры по умолчанию
+				$my_posts = get_posts(
+					array(
+						'numberposts' => -1,
+						'category' => 0,
+						'orderby' => 'date',
+						'order' => 'ASC',
+						'include' => array(),
+						'exclude' => array(),
+						'meta_key' => '',
+						'meta_value' => '',
+						'post_type' => 'social',
+						'suppress_filters' => true,
+						// подавление работы фильтров изменения SQL запроса
+					)
+				);
+
+				global $post;
+
+				foreach ($my_posts as $post) {
+					setup_postdata($post);
+					?>
+					<a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" class="p-3" target='_blank'>
+						<span class="icon-<?php the_title(); ?>"></span></a>
+
+					<?php
+				}
+
+				wp_reset_postdata(); // сброс
+				
+				?>
+
 			</div>
 		</div>
 	</div>
